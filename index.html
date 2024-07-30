@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Eligibility Checker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="form-container">
+        <h1>Loan Eligibility Checker</h1>
+        <form id="loan-form">
+            <label for="age">กรุณากรอกอายุของคุณ:</label>
+            <input type="number" id="age" name="age" required>
+
+            <label for="loan_term">กรุณากรอกระยะเวลาผ่อนชำระที่ต้องการ (ปี):</label>
+            <input type="number" id="loan_term" name="loan_term" required>
+
+            <button type="submit">ตรวจสอบสิทธิ์</button>
+            <button type="button" id="clear-button">เคลียร์</button>
+        </form>
+        <p id="result"></p>
+    </div>
+    <script>
+        document.getElementById('loan-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const age = parseInt(document.getElementById('age').value);
+    const loanTerm = parseInt(document.getElementById('loan_term').value);
+    const maxTotalAge = 75;
+
+    function checkLoanEligibility(age, loanTerm, maxTotalAge) {
+        if (age < 20) {
+            return false;
+        }
+        if (loanTerm > 40) {
+            return false;
+        }
+        if (age + loanTerm > maxTotalAge) {
+            return false;
+        }
+        return true;
+    }
+
+    const result = checkLoanEligibility(age, loanTerm, maxTotalAge);
+    const resultElement = document.getElementById('result');
+
+    if (result) {
+        resultElement.textContent = "คุณมีสิทธิ์ขอสินเชื่อ";
+        resultElement.style.color = "green";
+    } else {
+        resultElement.textContent = "คุณไม่ผ่านเกณฑ์การขอสินเชื่อ";
+        resultElement.style.color = "red";
+    }
+});
+
+document.getElementById('clear-button').addEventListener('click', function() {
+    document.getElementById('loan-form').reset();
+    document.getElementById('result').textContent = "";
+});
+
+    </script>
+</body>
+</html>
