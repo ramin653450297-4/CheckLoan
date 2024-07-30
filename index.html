@@ -32,8 +32,8 @@
     const maxTotalAge = 75;
 
     function checkLoanEligibility(age, loanTerm, maxTotalAge) {
-        if (age === 0 || loanTerm === 0) {
-            return "กรุณากรอกอายุและระยะเวลาผ่อนชำระที่มากกว่า 0";
+        if (age <= 0 || loanTerm <= 0) {
+            return "กรุณากรอกอายุและระยะเวลาผ่อนชำระเป็นจำนวนเต็มบวก";
         }
         if (age < 20) {
             return "อายุต้องไม่น้อยกว่า 20 ปี";
